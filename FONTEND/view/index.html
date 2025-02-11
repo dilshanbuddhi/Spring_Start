@@ -1,0 +1,425 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>user management</title>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+    /* Applying the playful Baloo 2 font to key sections */
+    body {
+      font-family: 'Baloo 2', cursive;
+    }
+
+    .py-5 {
+      padding-top: 0rem !important;
+    }
+
+    .hero-section {
+      padding-top: 0;
+      background-color: #f8f2eb;
+    }
+
+    .hero-section h1 {
+      color: #6c757d;
+      font-weight: lighter;
+      font-size: 4rem;
+    }
+
+    .hero-section span {
+      color: orange;
+    }
+
+    .hero-section img {
+      max-width: 100%;
+    }
+
+
+    .navbar-brand img {
+      width: 50px;
+    }
+
+    .nav-link {
+      font-size: 1.1rem;
+    }
+
+    #text{
+      margin-top: -20px;
+    }
+
+    footer {
+      background-color: #f8f2eb;
+    }
+
+    footer p {
+      font-size: 0.9rem;
+    }
+
+    /* Style for the navigation links */
+    .nav-link {
+      color: #888; /* Ash/gray color for non-active links */
+      transition: color 0.3s ease;
+    }
+
+    /* Style for the active navigation link */
+    .nav-link.active {
+      color: #FFA500; /* Orange color for the active link */
+    }
+
+    /* Hover effect for non-active links */
+    .nav-link:hover {
+      color: #555; /* Darker shade of gray for hover effect */
+    }
+
+    #cardSec h1{
+      margin-left: 100px;
+    }
+    .stats-section{
+      padding-top: 50px;
+    }
+    .stats-section .stat-card {
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .stats-section .stat-card h3 {
+      font-size: 1.5rem;
+      color: #6c757d;
+      margin-bottom: 10px;
+    }
+
+    .stats-section .stat-card .stat-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #FF8C00;
+    }
+
+    /* Add hover effect for a more interactive feel */
+    .stats-section .stat-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Adjusting margins and padding for better spacing */
+    .stats-section .col-md-3 {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header / Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <img src="images/dog.png" height="40" width="40"/> Waggy Pet Shop
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="">User</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="">test</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="">test</a>
+        </li>
+      </ul>
+      <div class="d-flex align-items-center">
+        <!-- Logout Icon -->
+        <a href="#" id="logoutLink" class="nav-link"><i class="bi bi-box-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Search Bar -->
+<br><br>
+
+<!-- Hero Section -->
+<section class="hero-section py-5">
+  <div class="container">
+    <div class="row align-items-center">
+
+      <div class="col-md-6" id="text">
+        <br>
+        <br>
+        <h1>User <span>Management!</span></h1>
+        <h2>Manage All <span>Users from here</span></h2>
+        <p>you can add/update/delete all users</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+<br><br>
+
+<section class="user-management-section py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <!-- Add User Button -->
+        <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addUserModal">
+          <i class="bi bi-person-plus"></i> Add New User
+        </button>
+
+        <table class="table table-bordered table-hover">
+          <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody id="userTableBody">
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Add User Modal -->
+<div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addUserModalLabel">Add New User</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="mb-3">
+            <label for="id" class="form-label">ID</label>
+            <input name="name" type="text" class="form-control" id="id" required>
+          </div>
+          <div class="mb-3">
+            <label for="name" class="form-label">Username</label>
+            <input name="name" type="text" class="form-control" id="name" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input name="email" type="email" class="form-control" id="email" required>
+          </div>
+
+          <button type="submit" id="addUserBtn" class="btn btn-primary">Add User</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit User Modal -->
+<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="mb-3">
+            <label for="editId" class="form-label">UserID</label>
+            <input name="id" type="text" class="form-control" id="editId" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="editName" class="form-label">Username</label>
+            <input name="name" type="text" class="form-control" id="editName"  required>
+          </div>
+          <div class="mb-3">
+            <label for="editEmail" class="form-label">Email</label>
+            <input name="email" type="email" class="form-control" id="editEmail"  required>
+          </div>
+
+          <button type="submit" id="editButton" class="btn btn-success">Update User</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete User Confirmation Modal -->
+<div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteUserModalLabel">Confirm Delete</h5>
+        <br>
+        <div class="mb-3">
+          <input name="id" type="text" class="form-control" id="deleteId" hidden="hidden">
+        </div>
+        <br>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this user?</p>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" id="deleteButton" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="text-center py-4">
+  <div class="container">
+    <p>&copy; 2025 Waggy Pet Shop. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script src="JQ/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+
+    getAllUsers();
+
+    $("#addUserBtn").on("click", function() {
+      console.log("Button Clicked");
+
+      var id = document.getElementById("id").value;
+      var name = document.getElementById("name").value;
+      var email = document.getElementById("email").value;
+
+      $.ajax({
+        url: 'http://localhost:8080/BackEnd_Web_exploded/customer/save',
+        method: 'POST',
+        contentType: 'application/json',  // Set content type to JSON
+        data: JSON.stringify({
+          id: id,
+          name: name,
+          email: email
+        }),
+        success: function(response) {
+          console.log("User saved successfully:", response);
+          $('#addUserModal').modal('hide');
+          getAllUsers();
+        },
+        error: function(xhr, status, error) {
+          console.error("Error:", xhr, status, error);
+        }
+      });
+    });
+
+    function getAllUsers() {
+    $.ajax({
+      url: 'http://localhost:8080/BackEnd_Web_exploded/customer/getAll',
+      method: 'GET',
+      success: function(response) {
+        $('#userTableBody').empty();
+        response.forEach(user => {
+          $('#userTableBody').append(`
+    <tr>
+      <td>${user.id}</td>
+      <td>${user.name}</td>
+      <td>${user.email}</td>
+      <td>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editUserModal"
+        onclick='editUser(${JSON.stringify(user)})'>Edit</button>
+        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteUserModal" onclick="deleteUser(${user.id})">Delete</button>
+      </td>
+    </tr>
+  `);
+        });
+      },
+      error: function(xhr, status, error) {
+        // Handle errors
+      }
+    });
+  }
+
+
+    $("#editButton").on("click", function() {
+
+      var id = document.getElementById("editId").value;
+      var name = document.getElementById("editName").value;
+      var email = document.getElementById("editEmail").value;
+      $.ajax({
+        url: 'http://localhost:8080/BackEnd_Web_exploded/customer/update',
+        method: 'PUT',
+        contentType: 'application/json',  // Set content type to JSON
+        data: JSON.stringify({
+          id: id,
+          name: name,
+          email: email
+        }),
+        success: function (response) {
+          console.log("User updated successfully:", response);
+          $('#editUserModal').modal('hide');
+          getAllUsers();
+        },
+        error: function (xhr, status, error) {
+          console.error("Error:", xhr, status, error);
+        }
+      });
+
+      });
+
+
+    $("#deleteButton").on("click", function() {
+      var id = document.getElementById("deleteId").value;
+      $.ajax({
+        url: 'http://localhost:8080/BackEnd_Web_exploded/customer/delete/' + id,
+        method: 'DELETE',
+        success: function (response) {
+          console.log("User deleted successfully:", response);
+          $('#deleteUserModal').modal('hide');
+          getAllUsers();
+        },
+        error: function (xhr, status, error) {
+          console.error("Error:", xhr, status, error);
+        }
+      });
+    });
+
+  });//ready function end wena thana
+
+  function editUser(user) {
+    console.log("edit clicked");
+    // Set the values of the modal fields based on the user object
+    document.getElementById('editId').value = user.id;
+    document.getElementById('editName').value = user.name;
+    document.getElementById('editEmail').value = user.email;
+
+    $('#editUserModal').modal('show');
+  }
+
+  function deleteUser(id) {
+    console.log("delete clicked");
+    document.getElementById('deleteId').value = id;
+    $('#deleteUserModal').modal('show');
+  }
+
+</script>
+</body>
+</html>
