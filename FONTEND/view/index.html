@@ -126,7 +126,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
     <a class="navbar-brand" href="#">
-      <img src="images/dog.png" height="40" width="40"/> Waggy Pet Shop
+       Users......
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -137,10 +137,10 @@
           <a class="nav-link active" href="">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="">User</a>
+          <a class="nav-link" href="index.html">User</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="">Home</a>
+          <a class="nav-link" href="item.html">Item</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="">test</a>
@@ -312,7 +312,7 @@
       var email = document.getElementById("email").value;
 
       $.ajax({
-        url: 'http://localhost:8080/BackEnd_Web_exploded/customer/save',
+        url: 'http://localhost:8080/api/v1/customers/save',
         method: 'POST',
         contentType: 'application/json',  // Set content type to JSON
         data: JSON.stringify({
@@ -333,7 +333,7 @@
 
     function getAllUsers() {
     $.ajax({
-      url: 'http://localhost:8080/BackEnd_Web_exploded/customer/getAll',
+      url: 'http://localhost:8080/api/v1/customers/getAll',
       method: 'GET',
       success: function(response) {
         $('#userTableBody').empty();
@@ -365,7 +365,8 @@
       var name = document.getElementById("editName").value;
       var email = document.getElementById("editEmail").value;
       $.ajax({
-        url: 'http://localhost:8080/BackEnd_Web_exploded/customer/update',
+
+        url: 'http://localhost:8080/api/v1/customers/update',
         method: 'PUT',
         contentType: 'application/json',  // Set content type to JSON
         data: JSON.stringify({
@@ -389,7 +390,7 @@
     $("#deleteButton").on("click", function() {
       var id = document.getElementById("deleteId").value;
       $.ajax({
-        url: 'http://localhost:8080/BackEnd_Web_exploded/customer/delete/' + id,
+        url: 'http://localhost:8080/api/v1/customers/delete/' + id,
         method: 'DELETE',
         success: function (response) {
           console.log("User deleted successfully:", response);
