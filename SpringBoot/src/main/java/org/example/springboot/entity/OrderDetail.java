@@ -23,4 +23,11 @@ public class OrderDetail {
     private Item item;
     private int qty;
     private double total;
+
+    public OrderDetail(double total, int qty, Item item, Orders orders) {
+        this.total = total;
+        this.qty = qty;
+        this.item = item;
+        this.orders = orders;
+    }
 }

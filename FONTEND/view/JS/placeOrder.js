@@ -135,6 +135,7 @@ $("#placeOrder").click((e) => {
     });
 
     // Sending the AJAX request with the array
+
     $.ajax({
         url: 'http://localhost:8080/api/v1/placeOrder/save',
         method: 'POST',
@@ -146,6 +147,9 @@ $("#placeOrder").click((e) => {
         }),
         success: function(response) {
             console.log(response);
+            cartdata.splice(0, cartdata.length);
+            tot=0
+            cartdata1.splice(0, cartdata1.length);
             alert("Order Placed Successfully");
         },
         error: function(xhr, status, error) {

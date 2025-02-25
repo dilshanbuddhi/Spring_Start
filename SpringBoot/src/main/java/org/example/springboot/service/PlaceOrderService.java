@@ -47,18 +47,25 @@ public class PlaceOrderService {
     }
 
     @Transactional
-    public void placeOrder(long cid, ArrayList<ItemDTO> arrayList, double tot) {
-        Optional<Customer> customer = customerRepo.findById(String.valueOf(cid));
-        Orders orders = new Orders(tot, customer.get());
-        orderRepo.save(orders);
+    public boolean placeOrder(long cid, ArrayList<ItemDTO> arrayList, double tot) {
+        try {
+            Optional<Customer> customer = customerRepo.findById(String.valueOf(cid));
+            Orders orders = new Orders(tot, customer.get());
+            orderRepo.save(orders);
 
-        for (ItemDTO itemDTO : arrayList) {
-            OrderDetail orderDetail = new OrderDetail(orders.getId(),orders,itemRepo.findById(itemDTO.getId()).get(), itemDTO.getQty(), itemDTO.getQty() * itemDTO.getPrice());
-            placeOrderRepo.save(orderDetail);
+            for (ItemDTO itemDTO : arrayList) {
+                System.out.println(orders.getId()+ "   jjjjjjd");
+                OrderDetail orderDetail = new OrderDetail(itemDTO.getQty() * itemDTO.getPrice(), itemDTO.getQty(), itemRepo.findById(itemDTO.getId()).get(), orders);
+               placeOrderRepo.save(orderDetail);
 
-            itemRepo.reduceQTY(itemDTO.getId(), itemDTO.getQty());
+                itemRepo.reduceQTY(itemDTO.getId(), itemDTO.getQty());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
+        return true;
 
-}}
+    }}
 
 

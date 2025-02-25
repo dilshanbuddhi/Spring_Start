@@ -5,6 +5,7 @@ import org.example.springboot.dto.OrderDetailDTO;
 import org.example.springboot.service.CustomerService;
 import org.example.springboot.service.PlaceOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,18 +40,26 @@ public List<Long> getCustomerIDs(){
     }
 
     @PostMapping("/save")
-    public boolean saveOrder(@RequestBody OrderDetailDTO dto){
-        System.out.println(dto.getCid()+" "+dto.getArrayList());
+    public ResponseEntity saveOrder(@RequestBody OrderDetailDTO dto){
+        try {
+            System.out.println(dto.getCid()+" "+dto.getArrayList());
 
-        for (ItemDTO itemDTO : dto.getArrayList()) {
-            System.out.println(itemDTO.getId() + "  " + itemDTO.getQty()+" "+itemDTO.getPrice());
-            System.out.println("Item Total : "+itemDTO.getQty()*itemDTO.getPrice());
-            System.out.println("Full Total :" + dto.getTot());
+            for (ItemDTO itemDTO : dto.getArrayList()) {
+                System.out.println(itemDTO.getId() + "  " + itemDTO.getQty()+" "+itemDTO.getPrice());
+                System.out.println("Item Total : "+itemDTO.getQty()*itemDTO.getPrice());
+                System.out.println("Full Total :" + dto.getTot());
 
+            }
+            boolean result = placeOrderService.placeOrder(dto.getCid(),dto.getArrayList(),dto.getTot());
+            if (result) {
+                return new ResponseEntity("Order Saved Successfully!!!", HttpStatus.ACCEPTED);
+            }else {
+                return new ResponseEntity("Order Saved Unsuccessfully!!!!!!",HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-        placeOrderService.placeOrder(dto.getCid(),dto.getArrayList(),dto.getTot());
-
-        return true;
 
     }
 }
