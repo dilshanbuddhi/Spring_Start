@@ -1,8 +1,8 @@
 package org.example.springboot.controller;
 
-import lombok.Getter;
 import org.example.springboot.dto.CustomerDto;
-import org.example.springboot.service.CustomerService;
+import org.example.springboot.service.ServiceFactory;
+import org.example.springboot.service.custom.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class CustomerController {
 
     @Autowired
-    private CustomerService customerService;
+    private CustomerService customerService = (CustomerService) ServiceFactory.getBoFactory().getBO(ServiceFactory.BOTypes.CUSTOMER);
 
     @PostMapping("/save")
     public ResponseEntity<Object> saveCustomer(@RequestBody CustomerDto customerDto){

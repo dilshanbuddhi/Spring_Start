@@ -1,10 +1,7 @@
 package org.example.springboot.controller;
 
-import lombok.Getter;
-import org.example.springboot.dto.CustomerDto;
 import org.example.springboot.dto.ItemDTO;
-import org.example.springboot.service.CustomerService;
-import org.example.springboot.service.ItemService;
+import org.example.springboot.service.custom.IMPL.ItemServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +15,7 @@ import java.util.ArrayList;
 public class ItemController {
 
     @Autowired
-    private ItemService itemService;
+    private ItemServiceImpl itemService;
 
     @PostMapping("/save")
     public ResponseEntity<Object> saveItem(@RequestBody ItemDTO itemdto){

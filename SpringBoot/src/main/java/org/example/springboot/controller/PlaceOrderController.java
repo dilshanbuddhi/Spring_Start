@@ -2,8 +2,8 @@ package org.example.springboot.controller;
 
 import org.example.springboot.dto.ItemDTO;
 import org.example.springboot.dto.OrderDetailDTO;
-import org.example.springboot.service.CustomerService;
-import org.example.springboot.service.PlaceOrderService;
+import org.example.springboot.service.custom.IMPL.CustomerServiceImpl;
+import org.example.springboot.service.custom.IMPL.PlaceOrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +17,10 @@ import java.util.List;
 public class PlaceOrderController {
 
 @Autowired
-private PlaceOrderService placeOrderService;
+private PlaceOrderServiceImpl placeOrderService;
 
 @Autowired
-private CustomerService customerService;
+private CustomerServiceImpl customerService;
 
 @GetMapping("/getCIDs")
 public List<Long> getCustomerIDs(){

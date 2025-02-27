@@ -1,11 +1,9 @@
-package org.example.springboot.service;
+package org.example.springboot.service.custom.IMPL;
 
-import org.example.springboot.dto.CustomerDto;
 import org.example.springboot.dto.ItemDTO;
-import org.example.springboot.entity.Customer;
 import org.example.springboot.entity.Item;
-import org.example.springboot.repo.CustomerRepo;
 import org.example.springboot.repo.ItemRepo;
+import org.example.springboot.service.custom.ItemService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Service
-public class ItemService {
+public class ItemServiceImpl implements ItemService {
 
 
     @Autowired

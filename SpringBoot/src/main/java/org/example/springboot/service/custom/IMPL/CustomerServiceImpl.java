@@ -1,8 +1,9 @@
-package org.example.springboot.service;
+package org.example.springboot.service.custom.IMPL;
 
 import org.example.springboot.dto.CustomerDto;
 import org.example.springboot.entity.Customer;
 import org.example.springboot.repo.CustomerRepo;
+import org.example.springboot.service.custom.CustomerService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,14 @@ import java.util.List;
 import static java.lang.Character.getType;
 
 @Service
-public class CustomerService {
+public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerRepo customerRepo;
 
     @Autowired
     private ModelMapper modelmapper;
+
+
 
     public boolean saveCustomer(CustomerDto customerDto) {
         if (customerRepo.existsCustomxerByEmail(customerDto.getEmail())){
