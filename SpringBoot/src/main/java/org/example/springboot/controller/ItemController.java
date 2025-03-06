@@ -14,6 +14,9 @@ import java.util.ArrayList;
 /*
 @CrossOrigin(origins = "http://localhost:63342", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
 */
+/*
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
+*/
 
 @CrossOrigin(origins = "*" , allowedHeaders = "*")
 public class ItemController {

@@ -82,7 +82,7 @@ console.log(
             document.getElementById("unitPrice").value = response.price;
         },
         error: function(xhr, status, error) {
-        z    console.log(error);
+            console.log(error);
         }
     });
     })

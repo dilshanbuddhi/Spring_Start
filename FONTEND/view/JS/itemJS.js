@@ -40,11 +40,10 @@
             }
 
             $.ajax({
-                url: 'http://localhost:8080/api/v1/item/getAll',
                 method: 'GET',
-                //dataType: 'json',
-                "headers": {
-                    'Authorization': `Bearer ` + localStorage.getItem('token')
+                url: 'http://localhost:8080/api/v1/item/getAll',
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem('token')
                 },
                 success: function(response) {
                     $('#ItemTableBody').empty();
