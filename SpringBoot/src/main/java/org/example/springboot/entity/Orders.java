@@ -18,10 +18,6 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    public Orders(double total, Customer customer) {
-        this.total = total;
-        this.customer = customer;
-    }
 
     private double total;
 
@@ -30,4 +26,10 @@ public class Orders {
 
     @OneToMany(mappedBy = "orders")
     private List<OrderDetail> odList;
+
+    public Orders(double total, Customer customer) {
+        this.total = total;
+        this.customer = customer;
+    }
+
 }

@@ -82,7 +82,7 @@ console.log(
             document.getElementById("unitPrice").value = response.price;
         },
         error: function(xhr, status, error) {
-            console.log(error);
+        z    console.log(error);
         }
     });
     })
@@ -93,7 +93,14 @@ $("#cart_btn").click((e) => {
     let iid = $('#itemSelect').val();
     let qty = $('#quantity').val();
     let unitPrice = $('#unitPrice').val();
-    let total = qty * unitPrice;
+    let discount = $("#discount").val();
+    let total;
+    if (discount == null){
+        total = qty * unitPrice;
+    }else {
+        total= qty * unitPrice - (qty * unitPrice * discount / 100);
+    }
+
     tot = tot + total;
 
     console.log(cid, iid, qty, unitPrice, total);
@@ -101,7 +108,7 @@ $("#cart_btn").click((e) => {
     let cartobj = {cid, iid, qty, unitPrice, total};
     cartdata.push(cartobj);
     console.log(cartdata);
-    $("#orderTotal").val('Order Total: '+tot);
+    $("#orderTotal").text('Order Total: ' + tot);
 
     loadCartDAta();
 })
@@ -116,25 +123,34 @@ function loadCartDAta(){
         <td>${cartdata[i].qty}</td>
         <td>${cartdata[i].unitPrice}</td>
         <td>${cartdata[i].total}</td>
+        <td><button class="btn btn-danger" onclick="removeItem(${i})">Remove</button></td>
         </tr>`;
         $('#ordertable').append(row);
     }
 }
+function removeItem(index) {
+    tot = tot - cartdata[index].total;
+    cartdata.splice(index, 1);
+    $("#orderTotal").text('Order Total: ' + tot);
+    loadCartDAta();
+}
+
+
 $("#placeOrder").click((e) => {
     // Example cartdata with multiple items
-    let cartdata1 = [
-
+    let itemdata = [
+  // backend ekt yna data tika
     ];
 
     cartdata.forEach(item => {
-        cartdata1.push({
+        itemdata.push(
+            {
             id: item.iid,
             qty: item.qty,
             price: item.unitPrice
-        });
+        }
+        );
     });
-
-    // Sending the AJAX request with the array
 
     $.ajax({
         url: 'http://localhost:8080/api/v1/placeOrder/save',
@@ -142,14 +158,15 @@ $("#placeOrder").click((e) => {
         contentType: 'application/json',
         data: JSON.stringify({
             cid: cartdata[0].cid,
-            arrayList: cartdata1,
+            arrayList: itemdata,
             tot: tot
         }),
         success: function(response) {
             console.log(response);
             cartdata.splice(0, cartdata.length);
             tot=0
-            cartdata1.splice(0, cartdata1.length);
+            itemdata.splice(0, itemdata.length);
+            $('#ordertable').empty();
             alert("Order Placed Successfully");
         },
         error: function(xhr, status, error) {

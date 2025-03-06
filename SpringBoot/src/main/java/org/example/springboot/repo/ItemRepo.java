@@ -13,7 +13,7 @@ public interface ItemRepo extends JpaRepository<Item, Long> {
             value = "select id from item",
             nativeQuery = true
     )
-    List<Long> findAllIds();
+    List<Long> findAllId();
 
 
     @Modifying
@@ -22,4 +22,5 @@ public interface ItemRepo extends JpaRepository<Item, Long> {
             nativeQuery = true
     )
     void reduceQTY(long id, int qty);
+
 }

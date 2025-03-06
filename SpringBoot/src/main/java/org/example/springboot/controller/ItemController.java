@@ -11,7 +11,11 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1/item")
-@CrossOrigin
+/*
+@CrossOrigin(origins = "http://localhost:63342", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
+*/
+
+@CrossOrigin(origins = "*" , allowedHeaders = "*")
 public class ItemController {
 
     @Autowired

@@ -15,11 +15,16 @@
         <option value="$PROJECT_DIR$/BackEnd/pom.xml" />
         <option value="$PROJECT_DIR$/Spring_data_JPA/pom.xml" />
         <option value="$PROJECT_DIR$/SpringBoot/pom.xml" />
+        <option value="$PROJECT_DIR$/Spring_Security/pom.xml" />
+        <option value="$PROJECT_DIR$/Spring_security/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/FullModeVsLightMode/pom.xml" />
+        <option value="$PROJECT_DIR$/RunTimeValueInjection/pom.xml" />
+        <option value="$PROJECT_DIR$/Spring_Security/pom.xml" />
+        <option value="$PROJECT_DIR$/Spring_security/pom.xml" />
         <option value="$PROJECT_DIR$/fullmodeVSLightMode/pom.xml" />
       </set>
     </option>

@@ -25,7 +25,7 @@ public class CustomerController {
           boolean result = customerService.saveCustomer(customerDto);
 
           if (result) {
-              return new ResponseEntity("Customer Saved Successfully!!!", HttpStatus.ACCEPTED);
+              return new ResponseEntity(" Customer Saved Successfully!!!",HttpStatus.ACCEPTED);
           }else {
               return new ResponseEntity("Customer Saved Unsuccessfully!!!!!!",HttpStatus.BAD_REQUEST);
           }
@@ -87,6 +87,10 @@ public class CustomerController {
 
     @GetMapping("/getCName/{id}")
     public String getCustomerName(@PathVariable String id){
-        return customerService.getCustomerName(id);
+        try {
+            return customerService.getCustomerName(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -58,6 +58,7 @@ public List<Long> getCustomerIDs(){
             }
         } catch (Exception e) {
             e.printStackTrace();
+            //throw new RuntimeException(e);
             return ResponseEntity.badRequest().body(e.getMessage());
         }
 

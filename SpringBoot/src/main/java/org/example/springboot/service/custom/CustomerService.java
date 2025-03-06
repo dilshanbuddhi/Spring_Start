@@ -2,6 +2,7 @@ package org.example.springboot.service.custom;
 
 import org.example.springboot.dto.CustomerDto;
 import org.example.springboot.service.SuperBO;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,4 +15,5 @@ public interface CustomerService extends SuperBO {
     List<Long> getAllIds() ;
     String getCustomerName(String id);
     boolean deleteCustomer(String id);
+
 }

@@ -138,13 +138,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="">Item</a>
+                    <a class="nav-link active" href="item.html">Item</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="index.html">User</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">Home</a>
+                    <a class="nav-link" href="placeOrder.html">place Order</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="">test</a>
@@ -203,6 +203,11 @@
                         <label for="quantity" class="form-label">Quantity</label>
                         <input type="number" class="form-control" id="quantity" placeholder="Enter quantity" required>
                     </div>
+
+                    <div class="col-md-2">
+                        <label for="discount" class="form-label">discount</label>
+                        <input type="number" class="form-control" id="discount" placeholder="Enter discount" required>
+                    </div>
                 </div>
                 <button type="button" class="btn btn-primary w-100" id="cart_btn">Add To Cart</button>
             </form>
@@ -218,6 +223,7 @@
             <th>qty</th>
             <th>Price</th>
             <th>total</th>
+            <th>Action</th>
 
         </tr>
         </thead>

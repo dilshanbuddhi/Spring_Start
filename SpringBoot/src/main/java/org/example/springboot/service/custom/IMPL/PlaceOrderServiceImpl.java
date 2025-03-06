@@ -38,7 +38,7 @@ public class PlaceOrderServiceImpl implements PlaceOrderService {
 
 
     public List<Long> getAllItemIDs() {
-        return itemRepo.findAllIds();
+        return itemRepo.findAllId();
     }
 
     public ItemDTO getAllbyId(String id) {
@@ -48,6 +48,7 @@ public class PlaceOrderServiceImpl implements PlaceOrderService {
 
     @Transactional
     public boolean placeOrder(long cid, ArrayList<ItemDTO> arrayList, double tot) {
+
         try {
             Optional<Customer> customer = customerRepo.findById(String.valueOf(cid));
             Orders orders = new Orders(tot, customer.get());
@@ -61,6 +62,7 @@ public class PlaceOrderServiceImpl implements PlaceOrderService {
                 itemRepo.reduceQTY(itemDTO.getId(), itemDTO.getQty());
             }
         } catch (Exception e) {
+            //throw new RuntimeException(e);
             e.printStackTrace();
             return false;
         }

@@ -1,6 +1,7 @@
     $(document).ready(function() {
 
     getAllItem();
+    console.log(localStorage.getItem("token"), "meka awe local eken");
 
     $("#addItemBtn").on("click", function() {
     console.log("Button Clicked");
@@ -13,7 +14,7 @@
     $.ajax({
         url: 'http://localhost:8080/api/v1/item/save',
     method: 'POST',
-    contentType: 'application/json',  // Set content type to JSON
+    contentType: 'application/json',
     data: JSON.stringify({
     name: name,
     des: des,
@@ -31,35 +32,47 @@
 });
 });
 
-    function getAllItem() {
-    $.ajax({
-    url: 'http://localhost:8080/api/v1/item/getAll',
-    method: 'GET',
-    success: function(response) {
-    $('#ItemTableBody').empty();
-    response.forEach(user => {
-    $('#ItemTableBody').append(`
-    <tr>
-      <td>${user.id}</td>
-      <td>${user.name}</td>
-      <td>${user.des}</td>
-      <td>${user.qty}</td>
-      <td>${user.price}</td>
-      <td>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editItemModal"
-        onclick='editItem(${JSON.stringify(user)})'>Edit</button>
-        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteItemModal" onclick="deleteUser(${user.id})">Delete</button>
-      </td>
-    </tr>
-  `);
-});
-},
-    error: function(xhr, status, error) {
-    // Handle errors
-}
-});
-}
+        function getAllItem() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                console.error('No token found in localStorage');
+                return;
+            }
 
+            $.ajax({
+                url: 'http://localhost:8080/api/v1/item/getAll',
+                method: 'GET',
+                //dataType: 'json',
+                "headers": {
+                    'Authorization': `Bearer ` + localStorage.getItem('token')
+                },
+                success: function(response) {
+                    $('#ItemTableBody').empty();
+                    response.forEach(user => {
+                        $('#ItemTableBody').append(`
+                    <tr>
+                        <td>${user.id}</td>
+                        <td>${user.name}</td>
+                        <td>${user.des}</td>
+                        <td>${user.qty}</td>
+                        <td>${user.price}</td>
+                        <td>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editItemModal"
+                                onclick='editItem(${JSON.stringify(user)})'>Edit</button>
+                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteItemModal" onclick="deleteUser(${user.id})">Delete</button>
+                        </td>
+                    </tr>
+                `);
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching items:', status, error);
+                    if (xhr.responseJSON && xhr.responseJSON.message) {
+                        console.error('Server response:', xhr.responseJSON.message);
+                    }
+                }
+            });
+        }
 
     $("#itemEditBtn").on("click", function() {
 
@@ -70,6 +83,7 @@
         var price = document.getElementById("editprice").value;
     $.ajax({
         url: 'http://localhost:8080/api/v1/item/update',
+
     method: 'PUT',
     contentType: 'application/json',  // Set content type to JSON
     data: JSON.stringify({

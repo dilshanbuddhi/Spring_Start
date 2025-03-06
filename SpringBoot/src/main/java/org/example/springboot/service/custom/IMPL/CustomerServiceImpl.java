@@ -7,12 +7,14 @@ import org.example.springboot.service.custom.CustomerService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-
-import static java.lang.Character.getType;
+import java.util.Set;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -26,7 +28,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     public boolean saveCustomer(CustomerDto customerDto) {
         if (customerRepo.existsCustomxerByEmail(customerDto.getEmail())){
-            return false;
+            throw new RuntimeException("Customer Not Found");
         }
         customerRepo.save(modelmapper.map(customerDto , Customer.class));
         return true;
@@ -41,8 +43,15 @@ public class CustomerServiceImpl implements CustomerService {
             customerRepo.deleteById(id);
             return true;
         } else {
-            return false;
+            throw new RuntimeException("Customer Not Found");
         }
+    }
+
+
+    private Set<SimpleGrantedAuthority> getAuthority(Customer user) {
+        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+        authorities.add(new SimpleGrantedAuthority(user.getEmail()));
+        return authorities;
     }
 
     public boolean updateCustomer(CustomerDto customerDto) {
@@ -50,7 +59,7 @@ public class CustomerServiceImpl implements CustomerService {
             customerRepo.save(modelmapper.map(customerDto , Customer.class));
             return true;
         } else {
-            return false;
+            throw new RuntimeException("Customer Not Found");
         }
     }
 
