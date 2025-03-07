@@ -1,12 +1,15 @@
 loadAllids()
 loadAllItems()
 let cartdata= [];
-var tot=0
+var tot=0;
 
 function loadAllids() {
     $.ajax({
         url: 'http://localhost:8080/api/v1/placeOrder/getCIDs',
         method: 'GET',
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem('token')
+        },
         success: function(response) {
             console.log(response);
             $("#customerSelect").empty();
@@ -33,6 +36,9 @@ console.log(cid,"ghjklff");
     $.ajax({
         url: 'http://localhost:8080/api/v1/customers/getCName/' + cid,
         method: 'GET',
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem('token')
+        },
         success: function(response) {
 
             console.log(response , "ghjkl");
@@ -49,6 +55,9 @@ function loadAllItems() {
     $.ajax({
         url: 'http://localhost:8080/api/v1/placeOrder/getAllItemIDs',
         method: 'GET',
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem('token')
+        },
         success: function(response) {
             console.log(response);
             $("#itemSelect").empty();
@@ -75,6 +84,9 @@ console.log(
     $.ajax({
         url: 'http://localhost:8080/api/v1/placeOrder/getAllbyId/' + iid,
         method: 'GET',
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem('token')
+        },
         success: function(response) {
 
             console.log(response , "ghjkl");
@@ -128,6 +140,7 @@ function loadCartDAta(){
         $('#ordertable').append(row);
     }
 }
+
 function removeItem(index) {
     tot = tot - cartdata[index].total;
     cartdata.splice(index, 1);
@@ -155,6 +168,9 @@ $("#placeOrder").click((e) => {
     $.ajax({
         url: 'http://localhost:8080/api/v1/placeOrder/save',
         method: 'POST',
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem('token')
+        },
         contentType: 'application/json',
         data: JSON.stringify({
             cid: cartdata[0].cid,
@@ -167,10 +183,23 @@ $("#placeOrder").click((e) => {
             tot=0
             itemdata.splice(0, itemdata.length);
             $('#ordertable').empty();
+            clear();
             alert("Order Placed Successfully");
         },
         error: function(xhr, status, error) {
             console.log(error);
         }
     });
+
 });
+
+function clear() {
+    document.getElementById("customerSelect").value = "";
+    document.getElementById("itemSelect").value = "";
+    document.getElementById("quantity").value = "";
+    document.getElementById("unitPrice").value = "";
+    document.getElementById("discount").value = "";
+    $("#orderTotal").text('Order Total: ' + tot);
+    document.getElementById("qtyOnHand").value = "";
+    document.getElementById("unitPrice").value = "";
+}

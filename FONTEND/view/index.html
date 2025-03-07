@@ -302,6 +302,13 @@
 <script>
   $(document).ready(function() {
 
+    let token = localStorage.getItem('token');
+    if (!token) {
+      console.log('Token is not found in localStorage');
+    } else {
+      console.log('Token found:', token);
+    }
+
     getAllUsers();
 
     $("#addUserBtn").on("click", function() {
@@ -314,6 +321,9 @@
       $.ajax({
         url: 'http://localhost:8080/api/v1/customers/save',
         method: 'POST',
+        headers: {
+          "Authorization": "Bearer " + token
+        },
         contentType: 'application/json',  // Set content type to JSON
         data: JSON.stringify({
           id: id,
@@ -335,6 +345,9 @@
     $.ajax({
       url: 'http://localhost:8080/api/v1/customers/getAll',
       method: 'GET',
+      headers: {
+        "Authorization": "Bearer " + token
+      },
       success: function(response) {
         $('#userTableBody').empty();
         response.forEach(user => {
@@ -368,6 +381,9 @@
 
         url: 'http://localhost:8080/api/v1/customers/update',
         method: 'PUT',
+        headers: {
+          "Authorization": "Bearer " + token
+        },
         contentType: 'application/json',  // Set content type to JSON
         data: JSON.stringify({
           id: id,
@@ -392,6 +408,9 @@
       $.ajax({
         url: 'http://localhost:8080/api/v1/customers/delete/' + id,
         method: 'DELETE',
+        headers: {
+          "Authorization": "Bearer " + token
+        },
         success: function (response) {
           console.log("User deleted successfully:", response);
           $('#deleteUserModal').modal('hide');

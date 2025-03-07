@@ -1,26 +1,42 @@
     $(document).ready(function() {
 
     getAllItem();
+
+        let token = localStorage.getItem('token');
+        if (!token) {
+            console.log('Token is not found in localStorage');
+        } else {
+            console.log('Token found:', token);
+        }
+
     console.log(localStorage.getItem("token"), "meka awe local eken");
 
     $("#addItemBtn").on("click", function() {
     console.log("Button Clicked");
+/*
+    console.log(localStorage.getItem('token'), "   when item id clickeddd");
+*/
 
     var name = document.getElementById("name").value;
     var des = document.getElementById("des").value;
     var qty = document.getElementById("qty").value;
     var price = document.getElementById("price").value;
 
-    $.ajax({
-        url: 'http://localhost:8080/api/v1/item/save',
-    method: 'POST',
-    contentType: 'application/json',
-    data: JSON.stringify({
-    name: name,
-    des: des,
-    qty: qty,
-    price: price
-}),
+
+
+        $.ajax({
+            method: 'POST',
+            url: 'http://localhost:8080/api/v1/item/save',
+            headers: {
+                "Authorization": "Bearer " + token
+            },
+            contentType: 'application/json',
+            data: JSON.stringify({
+                name: name,
+                des: des,
+                qty: qty,
+                price: price
+            }),
     success: function(response) {
     console.log("Item saved successfully:", response);
     $('#addItemModal').modal('hide');
@@ -82,7 +98,9 @@
         var price = document.getElementById("editprice").value;
     $.ajax({
         url: 'http://localhost:8080/api/v1/item/update',
-
+        headers: {
+            "Authorization": "Bearer " + token // Use the token here
+        },
     method: 'PUT',
     contentType: 'application/json',  // Set content type to JSON
     data: JSON.stringify({
@@ -109,6 +127,9 @@
     var id = document.getElementById("deleteId").value;
     $.ajax({
     url: 'http://localhost:8080/api/v1/item/delete/' + id,
+        headers: {
+            "Authorization": "Bearer " + token // Use the token here
+        },
     method: 'DELETE',
     success: function (response) {
     console.log("item deleted successfully:", response);
