@@ -3,6 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/BackEnd/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BackEnd/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Bean_Validation/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Configurayion/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Configurayion/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/FullModeVsLightMode/src/main/java" charset="UTF-8" />
@@ -12,6 +13,7 @@
     <file url="file://$PROJECT_DIR$/RunTimeValueInjection/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/RunTimeValueInjection/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/SpringBoot/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/SpringBootLogin/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/SpringEnviroment/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/SpringEnviroment/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/SpringWebMVC/src/main/java" charset="UTF-8" />
